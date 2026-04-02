@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-grpc
+  namespace: go-grpc
+  labels:
+    app: go-grpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-grpc
+  template:
+    metadata:
+      labels:
+        app: go-grpc
+    spec:
+      containers:
+      - name: go-grpc
+        image: go-grpc
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 50051
+          name: grpc
+          protocol: TCP
+      restartPolicy: Always
